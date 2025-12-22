@@ -7,19 +7,25 @@ int main() {
 
     Core core("/Users/yasha_nev/Projects/virtualGuitarPedalBoard/build/plugins");
 
-    auto deviceList = core.getDeviceList();
-
-    for (const auto &device : deviceList) {
+    std::cout << "Input device list: \n";
+    for (const auto &device : core.getInputDeviceList()) {
         std::cout << device << "\n";
     }
 
-    core.chooseInputDevice("Scarlett Solo USB");
-    core.chooseOutputtDevice("Динамики MacBook Pro");
+    std::cout << "\n";
 
-    core.start();
+    std::cout << "Output device list: \n";
+    for (const auto &device : core.getOutputDeviceList()) {
+        std::cout << device << "\n";
+    }
+
+    //core.chooseInputDevice("Scarlett Solo USB");
+    //core.chooseOutputtDevice("Динамики MacBook Pro");
+
+    //core.start();
 
     while(getchar() != 's') {
-        core.stop();
+        //core.stop();
     }
 
     return 0;

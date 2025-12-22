@@ -13,23 +13,6 @@ Core::Core(const std::string& pluginsDir):
     m_engine(m_pedalChain) {
 
     loadPlugins(pluginsDir);
-
-    auto& plugin = m_plugins.front();
-
-    m_engine.setAudioDriver(plugin->getDriver());
-}
-
-std::list<std::string> Core::getDeviceList() {
-    std::list<std::string> deviceList;
-
-    for(const auto& plugin: m_plugins) {
-        IAudioDriver* driver = plugin->getDriver();
-        for(const auto& device: driver->getDeviceList()) {
-            deviceList.push_back(device);
-        }
-    }
-
-    return deviceList;
 }
 
 void Core::loadPlugins(const std::string& pluginsDir) {
@@ -53,18 +36,72 @@ void Core::loadPlugins(const std::string& pluginsDir) {
     }
 }
 
+std::list<std::string> Core::getInputDeviceList() {
+    std::list<std::string> deviceList;
+
+    for (const auto& plugin : m_plugins) {
+
+        IAudioDriver *driver = plugin->getDriver();
+
+        auto driverDeviceList = driver->getInputDeviceList();
+
+        deviceList.insert(deviceList.cend(), driverDeviceList.cbegin(), driverDeviceList.cend());
+    }
+
+    return deviceList;
+}
+
+std::list<std::string> Core::getOutputDeviceList() {
+    std::list<std::string> deviceList;
+
+    for (const auto& plugin : m_plugins) {
+
+        IAudioDriver *driver = plugin->getDriver();
+
+        auto driverDeviceList = driver->getOutputDeviceList();
+
+        deviceList.insert(deviceList.cend(), driverDeviceList.cbegin(), driverDeviceList.cend());
+    }
+
+    return deviceList;
+}
+
+IAudioDriver* Core::findDriverByDeviceName (
+    const std::string& device,
+    DeviceType type
+) {
+    for (const auto& plugin : m_plugins) {
+        IAudioDriver* driver = plugin->getDriver();
+
+        const auto devices = (type == DeviceType::INPUT) ? driver->getInputDeviceList() : driver->getOutputDeviceList();
+
+        if (std::find(devices.begin(), devices.end(), device) != devices.end()) {
+            return driver;
+        }
+    }
+    return nullptr;
+}
+
 void Core::chooseInputDevice(const std::string& device) {
-    m_engine.setInputDevice(device);
+    IAudioDriver *driver = findDriverByDeviceName(device, DeviceType::INPUT);
+
+    if (driver) {
+        m_engine.setInputDevice(driver, device);
+    }
 }
 
 void Core::chooseOutputtDevice(const std::string& device) {
-    m_engine.setOutputDevice(device);
+    IAudioDriver *driver = findDriverByDeviceName(device, DeviceType::OUTPUT);
+
+    if (driver) {
+        m_engine.setOutputDevice(driver, device);
+    }
 }
 
 void Core::start() {
-    m_engine.start();
+    m_engine.startStreams();
 }
 
 void Core::stop() {
-    m_engine.stop();
+    m_engine.stopStreams();
 }

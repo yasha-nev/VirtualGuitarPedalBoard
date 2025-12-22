@@ -12,27 +12,17 @@ class AudioEngine {
 public:
     AudioEngine(const std::unique_ptr<PedalChain>& pedals);
 
-    void setInputDevice(const std::string& inputDeviceName);
+    void setInputDevice(const IAudioDriver* driver, const std::string& inputDeviceName);
 
-    void setOutputDevice(const std::string& outputDeviceName);
-
-    void setAudioDriver(IAudioDriver* driver);
+    void setOutputDevice(const IAudioDriver* driver, const std::string& outputDeviceName);
 
     void readCallbackHandler(AudioBlock& block);
 
     void writeCallbackHandler(AudioBlock& block);
 
-    void start() {
-        m_buffer.setFormat(m_outputDevice->getFormat());
+    void startStreams();
 
-        m_inputDevice->startStream();
-        m_outputDevice->startStream();
-    }
-
-    void stop() {
-        m_inputDevice->stopStream();
-        m_outputDevice->stopStream();
-    }
+    void stopStreams();
 
 private:
     AudioRingBuffer m_buffer;
@@ -40,8 +30,6 @@ private:
     std::unique_ptr<IAudioDevice> m_inputDevice;
 
     std::unique_ptr<IAudioDevice> m_outputDevice;
-
-    IAudioDriver* m_driver;
 
     const std::unique_ptr<PedalChain>& m_pedalChain;
 };

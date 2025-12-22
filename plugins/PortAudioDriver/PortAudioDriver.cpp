@@ -246,20 +246,35 @@ PortAudioDriver::~PortAudioDriver() {
     Pa_Terminate();
 }
 
-std::list<std::string> PortAudioDriver::getDeviceList() {
+std::list<std::string> PortAudioDriver::getInputDeviceList() {
     std::list<std::string> devices;
 
     int count = Pa_GetDeviceCount();
+
     for(int i = 0; i < count; ++i) {
         const PaDeviceInfo* info = Pa_GetDeviceInfo(i);
-        if(info) {
+        if(info && info->maxInputChannels > 0) {
             devices.emplace_back(info->name);
         }
     }
     return devices;
 }
 
-PaDeviceIndex PortAudioDriver::getDeviceIndex(const std::string& device) {
+std::list<std::string> PortAudioDriver::getOutputDeviceList() {
+     std::list<std::string> devices;
+
+    int count = Pa_GetDeviceCount();
+
+    for(int i = 0; i < count; ++i) {
+        const PaDeviceInfo* info = Pa_GetDeviceInfo(i);
+        if(info && info->maxOutputChannels > 0) {
+            devices.emplace_back(info->name);
+        }
+    }
+    return devices;
+}
+
+PaDeviceIndex PortAudioDriver::getDeviceIndex(const std::string& device) const{
 
     int numDevices = Pa_GetDeviceCount();
     if(numDevices < 0) {
@@ -277,7 +292,7 @@ PaDeviceIndex PortAudioDriver::getDeviceIndex(const std::string& device) {
 
 std::unique_ptr<IAudioDevice> PortAudioDriver::getInputDevice(
     const std::string& inputDeviceName,
-    std::function<void(AudioBlock& block)> readHandler) {
+    std::function<void(AudioBlock& block)> readHandler) const {
 
     PaDeviceIndex index = getDeviceIndex(inputDeviceName);
 
@@ -290,9 +305,9 @@ std::unique_ptr<IAudioDevice> PortAudioDriver::getInputDevice(
 
 std::unique_ptr<IAudioDevice> PortAudioDriver::getOutputDevice(
     const std::string& outputDeviceName,
-    std::function<void(AudioBlock& block)> writeHandler) {
+    std::function<void(AudioBlock& block)> writeHandler) const {
 
-    PaDeviceIndex index = getDeviceIndex(outputDeviceName);
+    PaDeviceIndex index = getDeviceIndex(outputDeviceName) ;
 
     if(index == -1) {
         return nullptr;

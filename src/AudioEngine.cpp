@@ -6,33 +6,25 @@ AudioEngine::AudioEngine(const std::unique_ptr<PedalChain>& pedals):
     m_buffer(AudioFormat(), 44100),
     m_inputDevice(nullptr),
     m_outputDevice(nullptr),
-    m_driver(nullptr),
     m_pedalChain(pedals) {
 }
 
-void AudioEngine::setInputDevice(const std::string& inputDeviceName) {
-    if(m_driver == nullptr) {
+void AudioEngine::setInputDevice(const IAudioDriver* driver, const std::string& inputDeviceName) {
+    if(driver == nullptr) {
         return;
     }
 
-    m_inputDevice = m_driver->getInputDevice(
+    m_inputDevice = driver->getInputDevice(
         inputDeviceName, [this](AudioBlock& block) { this->readCallbackHandler(block); });
 }
 
-void AudioEngine::setOutputDevice(const std::string& outputDeviceName) {
-    if(!m_driver) {
-        return;
-    }
-
-    m_outputDevice = m_driver->getOutputDevice(
-        outputDeviceName, [this](AudioBlock& block) { this->writeCallbackHandler(block); });
-}
-
-void AudioEngine::setAudioDriver(IAudioDriver* driver) {
+void AudioEngine::setOutputDevice(const IAudioDriver* driver, const std::string& outputDeviceName) {
     if(!driver) {
         return;
     }
-    m_driver = driver;
+
+    m_outputDevice = driver->getOutputDevice(
+        outputDeviceName, [this](AudioBlock& block) { this->writeCallbackHandler(block); });
 }
 
 void AudioEngine::readCallbackHandler(AudioBlock& block) {
@@ -42,4 +34,16 @@ void AudioEngine::readCallbackHandler(AudioBlock& block) {
 
 void AudioEngine::writeCallbackHandler(AudioBlock& block) {
     m_buffer.pop(block);
+}
+
+
+void AudioEngine::startStreams() {
+    m_buffer.setFormat(m_outputDevice->getFormat());
+    m_inputDevice->startStream();
+    m_outputDevice->startStream();
+}
+
+void AudioEngine::stopStreams() {
+    m_inputDevice->stopStream();
+    m_outputDevice->stopStream();
 }

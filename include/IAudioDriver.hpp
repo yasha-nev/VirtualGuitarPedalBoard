@@ -10,13 +10,15 @@ class IAudioDriver {
 public:
     virtual ~IAudioDriver() = default;
 
-    virtual std::list<std::string> getDeviceList() = 0;
+    virtual std::list<std::string> getInputDeviceList() = 0;
+
+    virtual std::list<std::string> getOutputDeviceList() = 0;
 
     virtual std::unique_ptr<IAudioDevice> getInputDevice(
         const std::string& inputDeviceName,
-        std::function<void(AudioBlock& block)> readhandler) = 0;
+        std::function<void(AudioBlock& block)> readhandler) const = 0;
 
     virtual std::unique_ptr<IAudioDevice> getOutputDevice(
         const std::string& outputDeviceName,
-        std::function<void(AudioBlock& block)> writeHandler) = 0;
+        std::function<void(AudioBlock& block)> writeHandler) const = 0;
 };

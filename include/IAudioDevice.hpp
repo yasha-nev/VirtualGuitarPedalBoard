@@ -2,6 +2,11 @@
 
 #include "AudioBuffer.hpp"
 
+enum class DeviceType {
+    INPUT,
+    OUTPUT
+};
+
 class IAudioDevice {
 public:
     virtual ~IAudioDevice() = default;
@@ -11,4 +16,7 @@ public:
     virtual void stopStream() = 0;
 
     virtual const AudioFormat& getFormat() const = 0;
+
+protected:
+    DeviceType m_type;
 };

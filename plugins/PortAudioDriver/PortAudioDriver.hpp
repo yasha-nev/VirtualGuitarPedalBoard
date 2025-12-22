@@ -92,17 +92,19 @@ public:
 
     ~PortAudioDriver() override;
 
-    PaDeviceIndex getDeviceIndex(const std::string& device);
+    PaDeviceIndex getDeviceIndex(const std::string& device) const;
 
-    std::list<std::string> getDeviceList() override;
+    std::list<std::string> getInputDeviceList() override;
+
+    std::list<std::string> getOutputDeviceList() override;
 
     std::unique_ptr<IAudioDevice> getInputDevice(
         const std::string& inputDeviceName,
-        std::function<void(AudioBlock& block)> inputCallback) override;
+        std::function<void(AudioBlock& block)> inputCallback) const override;
 
     std::unique_ptr<IAudioDevice> getOutputDevice(
         const std::string& outputDeviceName,
-        std::function<void(AudioBlock& block)> inputCallback) override;
+        std::function<void(AudioBlock& block)> inputCallback) const override;
 
 private:
     PaDeviceIndex m_defaultInput;
