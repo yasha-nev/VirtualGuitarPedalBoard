@@ -18,5 +18,6 @@ public:
     virtual const AudioFormat& getFormat() const = 0;
 
 protected:
+
     DeviceType m_type;
 };

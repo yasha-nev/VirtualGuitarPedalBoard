@@ -13,15 +13,19 @@ class Core {
 public:
     Core(const std::string& pluginsDir);
 
-    std::list<std::string> getInputDeviceList();
+    const std::list<std::string> &getInputDeviceList() const noexcept;
 
-    std::list<std::string> getOutputDeviceList();
+    const std::list<std::string> &getOutputDeviceList() const noexcept;
 
     void loadPlugins(const std::string& pluginsDir);
 
     void chooseInputDevice(const std::string& device);
 
-    void chooseOutputtDevice(const std::string& device);
+    void chooseOutputDevice(const std::string& device);
+
+    void insertPedalByIndex(std::unique_ptr<IBasePedal> pedal, size_t index);
+
+    void deletePedalByIndex(size_t index);
 
     void start();
 
@@ -31,9 +35,17 @@ private:
 
     IAudioDriver *findDriverByDeviceName(const std::string& device, DeviceType type);
 
+    bool m_inputDeviceChoosen;
+
+    bool m_outputDeviceChoosen;
+
     std::list<std::unique_ptr<AudioDriverPlugin>> m_plugins;
 
-    std::unique_ptr<PedalChain> m_pedalChain;
+    std::list<std::string> m_inputDeviceList;
+
+    std::list<std::string> m_outputDeviceList;
+
+    std::shared_ptr<PedalChain> m_pedalChain;
 
     AudioEngine m_engine;
 };

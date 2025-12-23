@@ -3,19 +3,18 @@
 #include "AudioBuffer.hpp"
 #include "IBasePedal.hpp"
 
-#include <list>
 #include <vector>
 
 class PedalChain {
 public:
     PedalChain();
 
-    void addPedal(std::unique_ptr<IBasePedal> pedal);
+    void insertPedalByIndex(std::unique_ptr<IBasePedal> pedal, size_t index);
 
-    void deletePedal(size_t index);
+    void deletePedalByIndex(size_t index);
 
     void process(AudioBlock& block);
 
 private:
-    std::list<std::unique_ptr<IBasePedal>> m_pedals;
+    std::vector<std::unique_ptr<IBasePedal>> m_pedals;
 };

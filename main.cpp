@@ -1,5 +1,6 @@
 
 #include "Core.hpp"
+#include "DistortionPedal.hpp"
 
 #include <iostream>
 
@@ -19,13 +20,18 @@ int main() {
         std::cout << device << "\n";
     }
 
-    //core.chooseInputDevice("Scarlett Solo USB");
-    //core.chooseOutputtDevice("Динамики MacBook Pro");
+    auto distortion = std::make_unique<DistortionPedal>(0.9f, 0.4f, 0.9f);
+    distortion->tongle();
 
-    //core.start();
+    core.insertPedalByIndex(std::move(distortion), 0);
+
+    core.chooseInputDevice("Scarlett Solo USB");
+    core.chooseOutputDevice("Динамики MacBook Pro");
+
+    core.start();
 
     while(getchar() != 's') {
-        //core.stop();
+        core.stop();
     }
 
     return 0;

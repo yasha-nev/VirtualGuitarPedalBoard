@@ -8,9 +8,20 @@
 #include <memory>
 #include <string>
 
+#define DEFAULT_AUDIOBUFFER_CAPACITY 44100
+
+enum class EngineState {
+    RUNNING,
+    STOPPED
+};
+
 class AudioEngine {
 public:
-    AudioEngine(const std::unique_ptr<PedalChain>& pedals);
+    AudioEngine(std::shared_ptr<PedalChain> pedals);
+
+    ~AudioEngine();
+
+    EngineState getState();
 
     void setInputDevice(const IAudioDriver* driver, const std::string& inputDeviceName);
 
@@ -25,11 +36,13 @@ public:
     void stopStreams();
 
 private:
+    std::atomic<EngineState> m_state;
+
     AudioRingBuffer m_buffer;
 
     std::unique_ptr<IAudioDevice> m_inputDevice;
 
     std::unique_ptr<IAudioDevice> m_outputDevice;
 
-    const std::unique_ptr<PedalChain>& m_pedalChain;
+    std::shared_ptr<PedalChain> m_pedalChain;
 };
