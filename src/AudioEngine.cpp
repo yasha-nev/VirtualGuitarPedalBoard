@@ -8,7 +8,7 @@ AudioEngine::AudioEngine(std::shared_ptr<PedalChain> pedals):
     m_pedalChain(pedals) {
 }
 
- AudioEngine::~AudioEngine() {
+AudioEngine::~AudioEngine() {
     stopStreams();
 }
 
@@ -35,7 +35,7 @@ void AudioEngine::setOutputDevice(const IAudioDriver* driver, const std::string&
 }
 
 void AudioEngine::readCallbackHandler(AudioBlock& block) {
-    if (m_pedalChain) {
+    if(m_pedalChain) {
         m_pedalChain->process(block);
     }
     m_buffer.push(block);
@@ -45,9 +45,8 @@ void AudioEngine::writeCallbackHandler(AudioBlock& block) {
     m_buffer.pop(block);
 }
 
-
 void AudioEngine::startStreams() {
-    if (m_state == EngineState::RUNNING || !m_inputDevice || !m_outputDevice) {
+    if(m_state == EngineState::RUNNING || !m_inputDevice || !m_outputDevice) {
         return;
     }
 
@@ -58,7 +57,7 @@ void AudioEngine::startStreams() {
 }
 
 void AudioEngine::stopStreams() {
-    if (m_state == EngineState::STOPPED || !m_inputDevice || !m_outputDevice) {
+    if(m_state == EngineState::STOPPED || !m_inputDevice || !m_outputDevice) {
         return;
     }
 

@@ -13,9 +13,9 @@ class Core {
 public:
     Core(const std::string& pluginsDir);
 
-    const std::list<std::string> &getInputDeviceList() const noexcept;
+    const std::list<std::string>& getInputDeviceList() const noexcept;
 
-    const std::list<std::string> &getOutputDeviceList() const noexcept;
+    const std::list<std::string>& getOutputDeviceList() const noexcept;
 
     void loadPlugins(const std::string& pluginsDir);
 
@@ -32,8 +32,7 @@ public:
     void stop();
 
 private:
-
-    IAudioDriver *findDriverByDeviceName(const std::string& device, DeviceType type);
+    IAudioDriver* findDriverByDeviceName(const std::string& device, DeviceType type);
 
     bool m_inputDeviceChoosen;
 

@@ -2,10 +2,7 @@
 
 #include "AudioBuffer.hpp"
 
-enum class DeviceType {
-    INPUT,
-    OUTPUT
-};
+enum class DeviceType { INPUT, OUTPUT };
 
 class IAudioDevice {
 public:
@@ -18,6 +15,5 @@ public:
     virtual const AudioFormat& getFormat() const = 0;
 
 protected:
-
     DeviceType m_type;
 };

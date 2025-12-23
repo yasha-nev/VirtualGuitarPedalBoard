@@ -1,6 +1,6 @@
 #include "DistortionPedal.hpp"
 
-DistortionPedal::DistortionPedal(float dist, float tone, float level) :
+DistortionPedal::DistortionPedal(float dist, float tone, float level):
     m_dist(dist),
     m_tone(tone),
     m_level(level) {
@@ -30,8 +30,12 @@ float DistortionPedal::preFilter(float x, float last) {
 
 float DistortionPedal::clip(float x) {
     const float threshold = 0.44f;
-    if(x > threshold) return threshold;
-    if(x < -threshold) return -threshold;
+    if(x > threshold) {
+        return threshold;
+    }
+    if(x < -threshold) {
+        return -threshold;
+    }
     return x;
 }
 

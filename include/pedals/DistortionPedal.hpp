@@ -4,15 +4,14 @@
 
 class DistortionPedal: public IBasePedal {
 public:
-
     DistortionPedal(float dist = 0.5f, float tone = 0.5f, float level = 0.5f);
 
     ~DistortionPedal();
 
     void setDist(float dist);
-    
+
     void setTone(float tone);
-    
+
     void setLevel(float level);
 
     void process(AudioBlock& block) override;
@@ -20,7 +19,6 @@ public:
     void tongle() override;
 
 private:
-
     float preFilter(float x, float last);
 
     float clip(float x);
@@ -33,7 +31,7 @@ private:
 
     float m_level;
 
-    std::vector<float> m_lastSamplePre {2, 0.0f};
+    std::vector<float> m_lastSamplePre { 2, 0.0f };
 
-    std::vector<float> m_lastSampleTone {2, 0.0f};
+    std::vector<float> m_lastSampleTone { 2, 0.0f };
 };

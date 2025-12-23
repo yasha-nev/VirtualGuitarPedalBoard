@@ -261,7 +261,7 @@ std::list<std::string> PortAudioDriver::getInputDeviceList() {
 }
 
 std::list<std::string> PortAudioDriver::getOutputDeviceList() {
-     std::list<std::string> devices;
+    std::list<std::string> devices;
 
     int count = Pa_GetDeviceCount();
 
@@ -274,7 +274,7 @@ std::list<std::string> PortAudioDriver::getOutputDeviceList() {
     return devices;
 }
 
-PaDeviceIndex PortAudioDriver::getDeviceIndex(const std::string& device) const{
+PaDeviceIndex PortAudioDriver::getDeviceIndex(const std::string& device) const {
 
     int numDevices = Pa_GetDeviceCount();
     if(numDevices < 0) {
@@ -307,7 +307,7 @@ std::unique_ptr<IAudioDevice> PortAudioDriver::getOutputDevice(
     const std::string& outputDeviceName,
     std::function<void(AudioBlock& block)> writeHandler) const {
 
-    PaDeviceIndex index = getDeviceIndex(outputDeviceName) ;
+    PaDeviceIndex index = getDeviceIndex(outputDeviceName);
 
     if(index == -1) {
         return nullptr;

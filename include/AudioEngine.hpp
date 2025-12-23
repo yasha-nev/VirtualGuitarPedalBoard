@@ -10,10 +10,7 @@
 
 #define DEFAULT_AUDIOBUFFER_CAPACITY 44100
 
-enum class EngineState {
-    RUNNING,
-    STOPPED
-};
+enum class EngineState { RUNNING, STOPPED };
 
 class AudioEngine {
 public:

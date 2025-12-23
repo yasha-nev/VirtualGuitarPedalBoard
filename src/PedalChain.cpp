@@ -12,8 +12,8 @@ void PedalChain::deletePedalByIndex(size_t index) {
 }
 
 void PedalChain::process(AudioBlock& block) {
-    for (const auto &pedal : m_pedals) {
-        if (pedal->isActive()) {
+    for(const auto& pedal: m_pedals) {
+        if(pedal->isActive()) {
             pedal->process(block);
         }
     }
