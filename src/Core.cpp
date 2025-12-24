@@ -92,8 +92,8 @@ void Core::chooseOutputDevice(const std::string& device) {
     }
 }
 
-void Core::insertPedalByIndex(std::unique_ptr<IBasePedal> pedal, size_t index) {
-    m_pedalChain->insertPedalByIndex(std::move(pedal), index);
+void Core::insertPedalByIndex(std::shared_ptr<IBasePedal> pedal, size_t index) {
+    m_pedalChain->insertPedalByIndex(pedal, index);
 }
 
 void Core::deletePedalByIndex(size_t index) {

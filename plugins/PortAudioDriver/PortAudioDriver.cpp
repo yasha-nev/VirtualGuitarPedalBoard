@@ -89,6 +89,10 @@ void PortAudioInputDevice::startStream() {
         return;
     }
 
+    if(!m_stream) {
+        openStream();
+    }
+
     PaError err;
 
     err = Pa_StartStream(m_stream);
@@ -110,6 +114,7 @@ void PortAudioInputDevice::stopStream() {
     Pa_AbortStream(m_stream);
     Pa_CloseStream(m_stream);
 
+    m_stream = NULL;
     m_active = false;
 
     std::cout << "Input stream stop\n";
@@ -205,6 +210,10 @@ void PortAudioOutputDevice::startStream() {
         return;
     }
 
+    if(!m_stream) {
+        openStream();
+    }
+
     PaError err = Pa_StartStream(m_stream);
     if(err != paNoError) {
         std::cout << "ERROR, Output stream not start\n";
@@ -223,6 +232,7 @@ void PortAudioOutputDevice::stopStream() {
     Pa_AbortStream(m_stream);
     Pa_CloseStream(m_stream);
 
+    m_stream = NULL;
     m_active = false;
 
     std::cout << "output stream stop\n";

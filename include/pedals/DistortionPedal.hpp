@@ -14,6 +14,12 @@ public:
 
     void setLevel(float level);
 
+    float getDist();
+
+    float getTone();
+
+    float getLevel();
+
     void process(AudioBlock& block) override;
 
     void tongle() override;

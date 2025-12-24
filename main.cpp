@@ -9,14 +9,14 @@ int main() {
     Core core("/Users/yasha_nev/Projects/virtualGuitarPedalBoard/build/plugins");
 
     std::cout << "Input device list: \n";
-    for (const auto &device : core.getInputDeviceList()) {
+    for(const auto& device: core.getInputDeviceList()) {
         std::cout << device << "\n";
     }
 
     std::cout << "\n";
 
     std::cout << "Output device list: \n";
-    for (const auto &device : core.getOutputDeviceList()) {
+    for(const auto& device: core.getOutputDeviceList()) {
         std::cout << device << "\n";
     }
 

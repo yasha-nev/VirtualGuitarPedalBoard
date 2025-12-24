@@ -23,7 +23,7 @@ public:
 
     void chooseOutputDevice(const std::string& device);
 
-    void insertPedalByIndex(std::unique_ptr<IBasePedal> pedal, size_t index);
+    void insertPedalByIndex(std::shared_ptr<IBasePedal> pedal, size_t index);
 
     void deletePedalByIndex(size_t index);
 

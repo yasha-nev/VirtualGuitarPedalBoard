@@ -1,10 +1,15 @@
 #include "PedalChain.hpp"
 
 PedalChain::PedalChain() {
+    m_pedals.resize(5);
+
+    for(auto& pedal: m_pedals) {
+        pedal = nullptr;
+    }
 }
 
-void PedalChain::insertPedalByIndex(std::unique_ptr<IBasePedal> pedal, size_t index) {
-    m_pedals.insert(m_pedals.cbegin() + index, std::move(pedal));
+void PedalChain::insertPedalByIndex(std::shared_ptr<IBasePedal> pedal, size_t index) {
+    m_pedals.insert(m_pedals.cbegin() + index, pedal);
 }
 
 void PedalChain::deletePedalByIndex(size_t index) {
@@ -13,7 +18,7 @@ void PedalChain::deletePedalByIndex(size_t index) {
 
 void PedalChain::process(AudioBlock& block) {
     for(const auto& pedal: m_pedals) {
-        if(pedal->isActive()) {
+        if(pedal && pedal->isActive()) {
             pedal->process(block);
         }
     }

@@ -23,6 +23,18 @@ void DistortionPedal::setLevel(float level) {
     m_level = level;
 }
 
+float DistortionPedal::getDist() {
+    return m_dist;
+}
+
+float DistortionPedal::getTone() {
+    return m_tone;
+}
+
+float DistortionPedal::getLevel() {
+    return m_level;
+}
+
 float DistortionPedal::preFilter(float x, float last) {
     // RC high/low simplified
     return 0.995f * x + 0.005f * last;

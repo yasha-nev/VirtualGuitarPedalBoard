@@ -9,12 +9,12 @@ class PedalChain {
 public:
     PedalChain();
 
-    void insertPedalByIndex(std::unique_ptr<IBasePedal> pedal, size_t index);
+    void insertPedalByIndex(std::shared_ptr<IBasePedal> pedal, size_t index);
 
     void deletePedalByIndex(size_t index);
 
     void process(AudioBlock& block);
 
 private:
-    std::vector<std::unique_ptr<IBasePedal>> m_pedals;
+    std::vector<std::shared_ptr<IBasePedal>> m_pedals;
 };
