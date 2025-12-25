@@ -24,7 +24,7 @@ public:
 
     void stopStream() override;
 
-    const AudioFormat& getFormat() const override;
+    const AudioFormat& getFormat() const noexcept override;
 
 private:
     static int readCallback(
@@ -62,7 +62,7 @@ public:
 
     void stopStream() override;
 
-    const AudioFormat& getFormat() const override;
+    const AudioFormat& getFormat() const noexcept override;
 
 private:
     static int writeCallback(

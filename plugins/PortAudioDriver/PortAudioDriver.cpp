@@ -120,7 +120,7 @@ void PortAudioInputDevice::stopStream() {
     std::cout << "Input stream stop\n";
 }
 
-const AudioFormat& PortAudioInputDevice::getFormat() const {
+const AudioFormat& PortAudioInputDevice::getFormat() const noexcept {
     return m_format;
 }
 
@@ -146,7 +146,6 @@ int PortAudioOutputDevice::writeCallback(
     const PaStreamCallbackTimeInfo* timeInfo,
     PaStreamCallbackFlags statusFlags,
     void* userData) {
-    size_t sampc;
 
     (void) inputBuffer;
     (void) timeInfo;
@@ -238,7 +237,7 @@ void PortAudioOutputDevice::stopStream() {
     std::cout << "output stream stop\n";
 }
 
-const AudioFormat& PortAudioOutputDevice::getFormat() const {
+const AudioFormat& PortAudioOutputDevice::getFormat() const noexcept {
     return m_format;
 }
 

@@ -24,7 +24,7 @@ Item {
             width: circleWidth
             height: circleWidth
             radius: 15
-            color: "#D7DBDD" //"#FFFFFF"
+            color: "#D7DBDD"
             x: (circle.width - knob.width) / 2
             y: circle.width - knob.width
         }
@@ -59,13 +59,13 @@ Item {
             width: parent.width - 12
             height: parent.height - 12
             radius: width / 2
-            color: "#D7DBDD" //"#FFFFFF"
+            color: "#D7DBDD"
 
             Text{
                 anchors.centerIn: parent
 
                 text: name
-                color: "black"
+                color: "#2a2a2a"
                 font.bold: true
             }
         }

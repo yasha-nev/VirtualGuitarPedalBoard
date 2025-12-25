@@ -12,7 +12,7 @@ AudioEngine::~AudioEngine() {
     stopStreams();
 }
 
-EngineState AudioEngine::getState() {
+EngineState AudioEngine::getState() const noexcept {
     return m_state.load();
 }
 

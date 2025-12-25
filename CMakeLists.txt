@@ -38,7 +38,7 @@ set(HEADERS
     include/pedals/DistortionPedal.hpp
     )
 
-#add_compile_options(-Wall -Wextra)
+add_compile_options(-Wall -Wextra)
 
 #===========LIBRARY=================
 add_library(vgp STATIC ${SRCS} ${HEADERS})

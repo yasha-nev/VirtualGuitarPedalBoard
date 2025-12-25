@@ -26,8 +26,6 @@ uint32_t AudioRingBuffer::freeFrames(uint32_t write, uint32_t read) const noexce
     return m_capacityFrames - availableFrames(write, read);
 }
 
-#include <iostream>
-
 bool AudioRingBuffer::push(AudioBlock& block) {
     AudioFormat format = block.getFormat();
     std::span<float>& input = block.getData();

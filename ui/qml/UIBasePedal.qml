@@ -15,10 +15,11 @@ Item {
 
     Connections {
         target: object
-        onIsActiveChanged: function(active) {
+
+        function onIsActiveChanged(active) {
             uiBasePedal.isActive = active
         }
-}
+    }
 
     width: 120
     height: 180

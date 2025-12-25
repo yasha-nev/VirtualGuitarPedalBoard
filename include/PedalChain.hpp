@@ -5,6 +5,8 @@
 
 #include <vector>
 
+#define PEDALS_COUNT 5
+
 class PedalChain {
 public:
     PedalChain();

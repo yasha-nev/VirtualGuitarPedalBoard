@@ -6,7 +6,7 @@ import "js/componentCreation.js" as PedalCreator
 
 Window {
     width: 900
-    height: 600
+    height: 450
     visible: true
     title: qsTr("VirtualGuitarProcessor")
 
@@ -56,13 +56,6 @@ Window {
                     height: 50
                     font.pointSize: 16
 
-                    background: Rectangle {
-                        width: 400
-                        height: 50
-                        radius: 5
-                        color: startButton.isActive ? "#AA5555" : "#5F5F5F"
-                    }
-
                     onClicked: {
                         app.start()
                         startButton.isActive = true
@@ -74,14 +67,6 @@ Window {
                     width: 400
                     height: 50
                     font.pointSize: 16
-
-                    background: Rectangle {
-                        width: 400
-                        height: 50
-                        radius: 5
-                        color: "#5F5F5F"
-                    }
-
 
                     onClicked: {
                         app.stop()
@@ -175,34 +160,37 @@ Window {
                                     }
                                 }
                             }
-                        }
-                    }
-                }
-            }
 
-            Dialog {
-                id: pedalDialog
-                title: "Choose type"
-                visible: false
+                            Dialog {
+                                id: pedalDialog
+                                title: "Choose type"
 
-                property var currentTarget: null
-                property int index: 0
-                property var targetId: null
+                                width: 120
+                                height: 180
 
-                contentItem: Item {
-                    width: parent.width
-                    height: 100
+                                property var currentTarget: null
+                                property int index: 0
 
-                    Column {
-                        spacing: 15
-                        anchors.centerIn: parent
+                                contentItem: Item {
+                                    anchors.fill: parent
 
-                        Button {
-                            width: 100
-                            text: "Distortion"
-                            onClicked: {
-                                pedalDialog.currentTarget.createPedal("Distortion", pedalDialog.currentTarget, pedalDialog.index)
-                                pedalDialog.close()
+                                    Column {
+                                        spacing: 15
+                                        anchors.centerIn: parent
+
+                                        Button {
+                                            text: "Distortion"
+                                            onClicked: {
+                                                pedalDialog.currentTarget.createPedal(
+                                                    "Distortion",
+                                                    pedalDialog.currentTarget,
+                                                    pedalDialog.index
+                                                )
+                                                pedalDialog.close()
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

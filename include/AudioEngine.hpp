@@ -18,7 +18,7 @@ public:
 
     ~AudioEngine();
 
-    EngineState getState();
+    EngineState getState() const noexcept;
 
     void setInputDevice(const IAudioDriver* driver, const std::string& inputDeviceName);
 

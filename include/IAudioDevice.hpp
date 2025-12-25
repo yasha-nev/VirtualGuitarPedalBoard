@@ -12,7 +12,7 @@ public:
 
     virtual void stopStream() = 0;
 
-    virtual const AudioFormat& getFormat() const = 0;
+    virtual const AudioFormat& getFormat() const noexcept = 0;
 
 protected:
     DeviceType m_type;

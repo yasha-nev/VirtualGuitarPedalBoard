@@ -14,11 +14,11 @@ public:
 
     void setLevel(float level);
 
-    float getDist();
+    float getDist() const noexcept;
 
-    float getTone();
+    float getTone() const noexcept;
 
-    float getLevel();
+    float getLevel() const noexcept;
 
     void process(AudioBlock& block) override;
 
