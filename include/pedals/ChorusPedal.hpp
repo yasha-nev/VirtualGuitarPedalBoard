@@ -6,9 +6,11 @@ class ChorusPedal: public IBasePedal {
 public:
     ChorusPedal();
 
-    ~ChorusPedal();
-
     void process(AudioBlock& block) override;
+
+    void setFormat(AudioFormat format) override;
+
+    AudioFormat getFormat() const noexcept override;
 
     void tongle() override;
 };

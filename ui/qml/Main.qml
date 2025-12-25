@@ -189,6 +189,18 @@ Window {
                                                 pedalDialog.close()
                                             }
                                         }
+
+                                        Button {
+                                            text: "Delay"
+                                            onClicked: {
+                                                pedalDialog.currentTarget.createPedal(
+                                                    "Delay",
+                                                    pedalDialog.currentTarget,
+                                                    pedalDialog.index
+                                                )
+                                                pedalDialog.close()
+                                            }
+                                        }
                                     }
                                 }
                             }

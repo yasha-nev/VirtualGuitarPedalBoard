@@ -4,9 +4,7 @@
 
 class DistortionPedal: public IBasePedal {
 public:
-    DistortionPedal(float dist = 0.5f, float tone = 0.5f, float level = 0.5f);
-
-    ~DistortionPedal();
+    DistortionPedal(float dist = 0.0f, float tone = 0.0f, float level = 0.0f);
 
     void setDist(float dist);
 
@@ -14,11 +12,15 @@ public:
 
     void setLevel(float level);
 
+    void setFormat(AudioFormat format) override;
+
     float getDist() const noexcept;
 
     float getTone() const noexcept;
 
     float getLevel() const noexcept;
+
+    AudioFormat getFormat() const noexcept override;
 
     void process(AudioBlock& block) override;
 

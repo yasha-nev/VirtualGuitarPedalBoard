@@ -1,5 +1,6 @@
 #include "Core.hpp"
 #include "include/App.hpp"
+#include "include/UIDelayPedal.hpp"
 #include "include/UIDistortionPedal.hpp"
 
 #include <QGuiApplication>
@@ -18,6 +19,7 @@ int main(int argc, char* argv[]) {
         Qt::QueuedConnection);
 
     qmlRegisterType<UIDistortionPedal>("Pedals", 1, 0, "UIDistortionPedal");
+    qmlRegisterType<UIDelayPedal>("Pedals", 1, 0, "UIDelayPedal");
 
     std::shared_ptr<Core> core = std::make_shared<Core>(
         "/Users/yasha_nev/Projects/virtualGuitarPedalBoard/build/plugins");

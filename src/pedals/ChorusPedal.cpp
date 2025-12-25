@@ -4,10 +4,16 @@ ChorusPedal::ChorusPedal() {
     m_type = PedalType::CHORUS;
 }
 
-ChorusPedal::~ChorusPedal() {
+void ChorusPedal::setFormat(AudioFormat format) {
+    m_format = format;
+}
+
+AudioFormat ChorusPedal::getFormat() const noexcept {
+    return m_format;
 }
 
 void ChorusPedal::process(AudioBlock& block) {
+    (void) block;
 }
 
 void ChorusPedal::tongle() {

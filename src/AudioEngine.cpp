@@ -51,6 +51,7 @@ void AudioEngine::startStreams() {
     }
 
     m_buffer.setFormat(m_outputDevice->getFormat());
+    m_pedalChain->setAudioFormat(m_outputDevice->getFormat());
     m_inputDevice->startStream();
     m_outputDevice->startStream();
     m_state = EngineState::RUNNING;

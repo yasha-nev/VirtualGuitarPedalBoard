@@ -8,19 +8,20 @@ DistortionPedal::DistortionPedal(float dist, float tone, float level):
     m_type = PedalType::DISTORTION;
 }
 
-DistortionPedal::~DistortionPedal() {
-}
-
 void DistortionPedal::setDist(float dist) {
-    m_dist = dist;
+    m_dist = std::clamp(dist, 0.0f, 1.0f);
 }
 
 void DistortionPedal::setTone(float tone) {
-    m_tone = tone;
+    m_tone = std::clamp(tone, 0.0f, 1.0f);
 }
 
 void DistortionPedal::setLevel(float level) {
-    m_level = level;
+    m_level = std::clamp(level, 0.0f, 1.0f);
+}
+
+void DistortionPedal::setFormat(AudioFormat format) {
+    m_format = format;
 }
 
 float DistortionPedal::getDist() const noexcept {
@@ -33,6 +34,10 @@ float DistortionPedal::getTone() const noexcept {
 
 float DistortionPedal::getLevel() const noexcept {
     return m_level;
+}
+
+AudioFormat DistortionPedal::getFormat() const noexcept {
+    return m_format;
 }
 
 float DistortionPedal::preFilter(float x, float last) {

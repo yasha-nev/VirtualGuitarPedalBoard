@@ -20,6 +20,7 @@ qt_add_qml_module(vgpUI
         qml/Main.qml
         qml/UIBasePedal.qml
         qml/UIDistortionPedal.qml
+        qml/UIDelayPedal.qml
         qml/CircleSwitch.qml
         qml/js/componentCreation.js
 
@@ -27,9 +28,11 @@ qt_add_qml_module(vgpUI
         src/App.cpp
         src/UIBasePedal.cpp
         src/UIDistortionPedal.cpp
+        src/UIDelayPedal.cpp
         include/App.hpp
         include/UIBasePedal.hpp
         include/UIDistortionPedal.hpp
+        include/UIDelayPedal.hpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

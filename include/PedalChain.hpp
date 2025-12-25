@@ -11,6 +11,8 @@ class PedalChain {
 public:
     PedalChain();
 
+    void setAudioFormat(AudioFormat format);
+
     void insertPedalByIndex(std::shared_ptr<IBasePedal> pedal, size_t index);
 
     void deletePedalByIndex(size_t index);
@@ -18,5 +20,7 @@ public:
     void process(AudioBlock& block);
 
 private:
+    AudioFormat m_format;
+
     std::vector<std::shared_ptr<IBasePedal>> m_pedals;
 };

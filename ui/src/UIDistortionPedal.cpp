@@ -30,11 +30,13 @@ float UIDistortionPedal::getLevel() {
 void UIDistortionPedal::setTone(float tone) {
     DistortionPedal* pedal = static_cast<DistortionPedal*>(m_pedal.get());
 
+    tone = tone / 360;
+
     if(pedal->getTone() == tone) {
         return;
     }
 
-    pedal->setTone(tone / 360);
+    pedal->setTone(tone);
 
     emit toneChanged(pedal->getTone());
 }
@@ -42,11 +44,13 @@ void UIDistortionPedal::setTone(float tone) {
 void UIDistortionPedal::setDist(float dist) {
     DistortionPedal* pedal = static_cast<DistortionPedal*>(m_pedal.get());
 
+    dist = dist / 360;
+
     if(pedal->getDist() == dist) {
         return;
     }
 
-    pedal->setDist(dist / 360);
+    pedal->setDist(dist);
 
     emit distChanged(pedal->getDist());
 }
@@ -54,11 +58,13 @@ void UIDistortionPedal::setDist(float dist) {
 void UIDistortionPedal::setLevel(float level) {
     DistortionPedal* pedal = static_cast<DistortionPedal*>(m_pedal.get());
 
+    level = level / 360;
+
     if(pedal->getLevel() == level) {
         return;
     }
 
-    pedal->setLevel(level / 360);
+    pedal->setLevel(level);
 
     emit levelChanged(pedal->getLevel());
 }

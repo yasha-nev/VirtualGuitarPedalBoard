@@ -21,6 +21,8 @@ function createPedalObjects(pedalType, parentObject, index) {
 
     if (pedalType === "Distortion") {
         component = Qt.createComponent("../UIDistortionPedal.qml")
+    } else if (pedalType === "Delay") {
+        component = Qt.createComponent("../UIDelayPedal.qml")
     }
 
     if (component.status === Component.Error) {
