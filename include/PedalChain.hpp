@@ -13,6 +13,8 @@ public:
 
     void setAudioFormat(AudioFormat format);
 
+    std::vector<std::shared_ptr<IBasePedal>>& getPedals();
+
     void insertPedalByIndex(std::shared_ptr<IBasePedal> pedal, size_t index);
 
     void deletePedalByIndex(size_t index);

@@ -100,6 +100,10 @@ void Core::deletePedalByIndex(size_t index) {
     m_pedalChain->deletePedalByIndex(index);
 }
 
+std::vector<std::shared_ptr<IBasePedal>>& Core::getPedals() {
+    return m_pedalChain->getPedals();
+}
+
 void Core::start() {
     if(!m_inputDeviceChoosen || !m_outputDeviceChoosen) {
         return;

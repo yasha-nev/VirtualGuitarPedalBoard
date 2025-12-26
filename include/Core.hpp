@@ -27,6 +27,8 @@ public:
 
     void deletePedalByIndex(size_t index);
 
+    std::vector<std::shared_ptr<IBasePedal>>& getPedals();
+
     void start();
 
     void stop();

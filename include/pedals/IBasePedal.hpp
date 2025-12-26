@@ -12,6 +12,10 @@ public:
 
     virtual AudioFormat getFormat() const noexcept = 0;
 
+    virtual PedalType getType() const noexcept {
+        return m_type;
+    };
+
     virtual void process(AudioBlock& block) = 0;
 
     virtual bool isActive() {

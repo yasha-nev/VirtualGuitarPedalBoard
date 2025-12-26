@@ -33,6 +33,10 @@ void PedalChain::deletePedalByIndex(size_t index) {
     m_pedals[index].reset();
 }
 
+std::vector<std::shared_ptr<IBasePedal>>& PedalChain::getPedals() {
+    return m_pedals;
+}
+
 void PedalChain::process(AudioBlock& block) {
     for(const auto& pedal: m_pedals) {
         if(!pedal || !pedal->isActive()) {
