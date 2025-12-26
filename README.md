@@ -2,9 +2,9 @@
 Virtual Guitar Pedalboard is a simple guitar processor written in C++ that implements a pedal chain with real-time audio processing.
 
 The project was created for educational and recreational purposes.
-It provides both a basic CLI interface and a full-featured UI written in Qt/QML.
 
-The core project is independent of Qt.
+It provides both a basic CLI interface and a full-featured UI written in Qt/QML. The core project is independent of Qt.
+
 Up to 5 pedals can be placed in the processing chain.
 Currently implemented pedals are: Distortion, Delay and Chorus.
 
