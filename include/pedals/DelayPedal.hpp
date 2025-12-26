@@ -24,8 +24,6 @@ public:
 
     void process(AudioBlock& block) override;
 
-    void tongle() override;
-
 protected:
     float m_time;
 

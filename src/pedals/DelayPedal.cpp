@@ -83,7 +83,3 @@ void DelayPedal::process(AudioBlock& block) {
         m_writeIndex[ch] = writeIndex;
     }
 }
-
-void DelayPedal::tongle() {
-    m_active = !m_active;
-}

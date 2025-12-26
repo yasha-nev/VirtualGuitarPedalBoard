@@ -11,6 +11,4 @@ public:
     void setFormat(AudioFormat format) override;
 
     AudioFormat getFormat() const noexcept override;
-
-    void tongle() override;
 };

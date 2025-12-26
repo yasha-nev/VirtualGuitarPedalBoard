@@ -5,100 +5,82 @@ import Pedals 1.0
 import "js/componentCreation.js" as PedalCreator
 
 Window {
-    width: 900
-    height: 450
+    width: 1180
+    height: 300
     visible: true
     title: qsTr("VirtualGuitarProcessor")
 
     Rectangle {
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
         color: "#2a2a2a"
 
-        Column {
-            anchors.centerIn: parent
-            spacing: 20
+        Row {
+            anchors.fill: parent
+            anchors.margins: 20
+            spacing: 30
 
-            Row {
+            Column {
+                width: 160
                 spacing: 20
 
                 ComboBox {
                     id: inputDeviceComboBox
-                    width: 400
+                    width: parent.width
                     model: app.inputDeviceList
                     currentIndex: 0
-                    onActivated: {
-                        app.setInputDevice(inputDeviceComboBox.currentText)
-                    }
                     font.pointSize: 14
+                    onActivated: app.setInputDevice(currentText)
                 }
 
                 ComboBox {
                     id: outputDeviceComboBox
-                    width: 400
+                    width: parent.width
                     model: app.outputDeviceList
                     currentIndex: 0
-                    onActivated: {
-                        app.setOutputDevice(outputDeviceComboBox.currentText)
-                    }
                     font.pointSize: 14
+                    onActivated: app.setOutputDevice(currentText)
                 }
-            }
-            Row{
-                spacing: 20
 
-                Button {
+                Rectangle {
                     id: startButton
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    width: 60
+                    height: 60
+                    radius: width / 2
+
                     property bool isActive: false
+                    color: isActive ? "#FF5555" : "#555555"
+                    border.color: "#888888"
 
-                    text: "Запустить"
-                    width: 400
-                    height: 50
-                    font.pointSize: 16
-
-                    onClicked: {
-                        app.start()
-                        startButton.isActive = true
-                    }
-                }
-
-                Button {
-                    text: "Остановить"
-                    width: 400
-                    height: 50
-                    font.pointSize: 16
-
-                    onClicked: {
-                        app.stop()
-                        startButton.isActive = false
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            startButton.isActive ? app.stop() : app.start()
+                            startButton.isActive = !startButton.isActive
+                        }
                     }
                 }
             }
 
             Rectangle {
-                width: parent.width
-                height: 250
+                width: 900
+                height: 260
+                radius: 10
                 color: "#333333"
                 border.color: "#555555"
-                radius: 10
-                anchors.horizontalCenter: parent.horizontalCenter
 
                 Row {
                     id: pedalRow
-                    spacing: 25
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.centerIn: parent
+                    spacing: 30
 
-                    Component.onCompleted: {
-                        PedalCreator.initPedals()
-                    }
+                    Component.onCompleted: PedalCreator.initPedals()
 
                     Repeater {
-                        id: repeater
                         model: 5
 
                         delegate: Rectangle {
-
                             id: pedalArea
 
                             property QtObject pedal
@@ -108,9 +90,6 @@ Window {
                             height: 225
 
                             Rectangle {
-                                anchors.top: parent.top
-                                anchors.right: parent.right
-
                                 width: 120
                                 height: 180
                                 radius: 5
@@ -126,7 +105,7 @@ Window {
                                     }
                                 }
 
-                                function createPedal(pedalType, parent, pedalIndex){
+                                function createPedal(pedalType, parent, pedalIndex) {
                                     var pedal = PedalCreator.createPedalObjects(pedalType, parent, pedalIndex)
                                     pedalArea.pedal = pedal
                                     app.addPedal(pedal.object, index);
@@ -134,7 +113,7 @@ Window {
                             }
 
                             Rectangle {
-                                id: cancelButton
+                                id: deleteButton
 
                                 anchors.bottom: parent.bottom
                                 anchors.horizontalCenter: parent.horizontalCenter
@@ -142,14 +121,15 @@ Window {
 
                                 width: 25
                                 height: 25
-                                radius: cancelButton.width / 2
+                                radius: deleteButton.width / 2
+
                                 color: "#555555"
                                 border.color: "#888888"
 
                                 Text {
                                     anchors.centerIn: parent
-                                    color: "#FFFFFF"
                                     text: "x"
+                                    color: "#FFFFFF"
                                 }
 
                                 MouseArea {

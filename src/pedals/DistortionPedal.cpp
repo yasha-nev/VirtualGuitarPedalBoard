@@ -92,7 +92,3 @@ void DistortionPedal::process(AudioBlock& block) {
         m_lastSampleTone[ch] = lastSampleTone;
     }
 }
-
-void DistortionPedal::tongle() {
-    m_active = !m_active;
-}

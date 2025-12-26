@@ -15,6 +15,3 @@ AudioFormat ChorusPedal::getFormat() const noexcept {
 void ChorusPedal::process(AudioBlock& block) {
     (void) block;
 }
-
-void ChorusPedal::tongle() {
-}

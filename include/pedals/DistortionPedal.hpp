@@ -24,8 +24,6 @@ public:
 
     void process(AudioBlock& block) override;
 
-    void tongle() override;
-
 private:
     float preFilter(float x, float last);
 
