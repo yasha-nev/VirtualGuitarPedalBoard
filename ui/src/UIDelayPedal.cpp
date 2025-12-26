@@ -5,24 +5,32 @@ UIDelayPedal::UIDelayPedal(QObject* parent):
     m_pedal = std::make_shared<DelayPedal>();
 }
 
-std::shared_ptr<IBasePedal> UIDelayPedal::getPedal() {
-    return m_pedal;
-}
-
-float UIDelayPedal::getTime() {
+float UIDelayPedal::time() {
     DelayPedal* pedal = static_cast<DelayPedal*>(m_pedal.get());
+
+    if(!pedal) {
+        return 0.0f;
+    }
 
     return pedal->getTime();
 }
 
-float UIDelayPedal::getFeedback() {
+float UIDelayPedal::feedback() {
     DelayPedal* pedal = static_cast<DelayPedal*>(m_pedal.get());
+
+    if(!pedal) {
+        return 0.0f;
+    }
 
     return pedal->getFeedback();
 }
 
-float UIDelayPedal::getLevel() {
+float UIDelayPedal::level() {
     DelayPedal* pedal = static_cast<DelayPedal*>(m_pedal.get());
+
+    if(!pedal) {
+        return 0.0f;
+    }
 
     return pedal->getLevel();
 }
@@ -32,7 +40,7 @@ void UIDelayPedal::setTime(float time) {
 
     time = time / 180;
 
-    if(pedal->getTime() == time) {
+    if(!pedal || pedal->getTime() == time) {
         return;
     }
 
@@ -46,7 +54,7 @@ void UIDelayPedal::setFeedback(float feedback) {
 
     feedback = feedback / 360;
 
-    if(pedal->getFeedback() == feedback) {
+    if(!pedal || pedal->getFeedback() == feedback) {
         return;
     }
 
@@ -60,7 +68,7 @@ void UIDelayPedal::setLevel(float level) {
 
     level = level / 360;
 
-    if(pedal->getLevel() == level) {
+    if(!pedal || pedal->getLevel() == level) {
         return;
     }
 

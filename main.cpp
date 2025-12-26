@@ -4,9 +4,14 @@
 
 #include <iostream>
 
-int main() {
+int main(int argc, char* argv[]) {
 
-    Core core("/Users/yasha_nev/Projects/virtualGuitarPedalBoard/build/plugins");
+    if(argc < 2) {
+        std::cout << "Usege: vgp path/to/plugins/dir\n";
+        return 0;
+    }
+
+    Core core(argv[1]);
 
     std::cout << "Input device list: \n";
     for(const auto& device: core.getInputDeviceList()) {

@@ -181,6 +181,18 @@ Window {
                                                 pedalDialog.close()
                                             }
                                         }
+
+                                        Button {
+                                            text: "Chorus"
+                                            onClicked: {
+                                                pedalDialog.currentTarget.createPedal(
+                                                    "Chorus",
+                                                    pedalDialog.currentTarget,
+                                                    pedalDialog.index
+                                                )
+                                                pedalDialog.close()
+                                            }
+                                        }
                                     }
                                 }
                             }

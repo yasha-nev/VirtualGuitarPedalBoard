@@ -1,5 +1,6 @@
 #include "Core.hpp"
 #include "include/App.hpp"
+#include "include/UIChorusPedal.hpp"
 #include "include/UIDelayPedal.hpp"
 #include "include/UIDistortionPedal.hpp"
 
@@ -8,6 +9,12 @@
 #include <QQmlContext>
 
 int main(int argc, char* argv[]) {
+
+    if(argc < 2) {
+        std::cout << "Usege: vgp path/to/plugins/dir\n";
+        return 0;
+    }
+
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
@@ -20,9 +27,9 @@ int main(int argc, char* argv[]) {
 
     qmlRegisterType<UIDistortionPedal>("Pedals", 1, 0, "UIDistortionPedal");
     qmlRegisterType<UIDelayPedal>("Pedals", 1, 0, "UIDelayPedal");
+    qmlRegisterType<UIChorusPedal>("Pedals", 1, 0, "UIChorusPedal");
 
-    std::shared_ptr<Core> core = std::make_shared<Core>(
-        "/Users/yasha_nev/Projects/virtualGuitarPedalBoard/build/plugins");
+    std::shared_ptr<Core> core = std::make_shared<Core>(argv[1]);
 
     engine.rootContext()->setContextProperty("app", new App(core));
 

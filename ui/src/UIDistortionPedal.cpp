@@ -5,24 +5,32 @@ UIDistortionPedal::UIDistortionPedal(QObject* parent):
     m_pedal = std::make_shared<DistortionPedal>();
 }
 
-std::shared_ptr<IBasePedal> UIDistortionPedal::getPedal() {
-    return m_pedal;
-}
-
-float UIDistortionPedal::getTone() {
+float UIDistortionPedal::tone() {
     DistortionPedal* pedal = static_cast<DistortionPedal*>(m_pedal.get());
+
+    if(!pedal) {
+        return 0.0f;
+    }
 
     return pedal->getTone();
 }
 
-float UIDistortionPedal::getDist() {
+float UIDistortionPedal::dist() {
     DistortionPedal* pedal = static_cast<DistortionPedal*>(m_pedal.get());
+
+    if(!pedal) {
+        return 0.0f;
+    }
 
     return pedal->getDist();
 }
 
-float UIDistortionPedal::getLevel() {
+float UIDistortionPedal::level() {
     DistortionPedal* pedal = static_cast<DistortionPedal*>(m_pedal.get());
+
+    if(!pedal) {
+        return 0.0f;
+    }
 
     return pedal->getLevel();
 }
@@ -32,7 +40,7 @@ void UIDistortionPedal::setTone(float tone) {
 
     tone = tone / 360;
 
-    if(pedal->getTone() == tone) {
+    if(!pedal || pedal->getTone() == tone) {
         return;
     }
 
@@ -46,7 +54,7 @@ void UIDistortionPedal::setDist(float dist) {
 
     dist = dist / 360;
 
-    if(pedal->getDist() == dist) {
+    if(!pedal || pedal->getDist() == dist) {
         return;
     }
 
@@ -60,7 +68,7 @@ void UIDistortionPedal::setLevel(float level) {
 
     level = level / 360;
 
-    if(pedal->getLevel() == level) {
+    if(!pedal || pedal->getLevel() == level) {
         return;
     }
 

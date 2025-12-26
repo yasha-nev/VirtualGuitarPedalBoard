@@ -19,6 +19,7 @@ qt_add_qml_module(vgpUI
     QML_FILES
         qml/Main.qml
         qml/UIBasePedal.qml
+        qml/UIChorusPedal.qml
         qml/UIDistortionPedal.qml
         qml/UIDelayPedal.qml
         qml/CircleSwitch.qml
@@ -27,9 +28,11 @@ qt_add_qml_module(vgpUI
     SOURCES
         src/App.cpp
         src/UIBasePedal.cpp
+        src/UIChorusPedal.cpp
         src/UIDistortionPedal.cpp
         src/UIDelayPedal.cpp
         include/App.hpp
+        include/UIChorusPedal.hpp
         include/UIBasePedal.hpp
         include/UIDistortionPedal.hpp
         include/UIDelayPedal.hpp

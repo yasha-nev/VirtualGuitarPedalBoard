@@ -4,7 +4,7 @@
 
 class DelayPedal: public IBasePedal {
 public:
-    DelayPedal(float time = 0.0f, float feedback = 0.0f, float level = 0.0f);
+    explicit DelayPedal(float time = 0.0f, float feedback = 0.0f, float level = 0.0f);
 
     void setTime(float time);
 

@@ -4,7 +4,7 @@
 
 class DistortionPedal: public IBasePedal {
 public:
-    DistortionPedal(float dist = 0.0f, float tone = 0.0f, float level = 0.0f);
+    explicit DistortionPedal(float dist = 0.0f, float tone = 0.0f, float level = 0.0f);
 
     void setDist(float dist);
 

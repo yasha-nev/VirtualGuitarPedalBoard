@@ -20,7 +20,7 @@ public slots:
 
     virtual void click();
 
-    virtual std::shared_ptr<IBasePedal> getPedal() = 0;
+    virtual std::shared_ptr<IBasePedal> getPedal();
 
 signals:
     void isActiveChanged(bool active);

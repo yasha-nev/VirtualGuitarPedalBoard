@@ -13,6 +13,10 @@ bool UIBasePedal::isActive() {
     return m_pedal->isActive();
 }
 
+std::shared_ptr<IBasePedal> UIBasePedal::getPedal() {
+    return m_pedal;
+}
+
 void UIBasePedal::click() {
     if(!m_pedal) {
         return;
