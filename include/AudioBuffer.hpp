@@ -1,20 +1,23 @@
 #pragma once
 
 #include <algorithm>
+#include <atomic>
 #include <cstddef>
+#include <cstring>
 #include <iostream>
 #include <span>
+#include <vector>
 
 enum class SampleType {
     Float32,
 };
 
-struct AudioFormat {
+typedef struct AudioFormat {
     uint32_t sampleRate;
     uint16_t channels;
     SampleType type;
     bool interleaved = false;
-};
+} AudioFormat;
 
 size_t bytesPerSample(SampleType type) noexcept;
 

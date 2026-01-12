@@ -3,6 +3,7 @@
 #include "AudioBuffer.hpp"
 #include "IBasePedal.hpp"
 
+#include <memory>
 #include <vector>
 
 #define PEDALS_COUNT 5

@@ -3,7 +3,9 @@
 #include "AudioBuffer.hpp"
 #include "IAudioDevice.hpp"
 
+#include <functional>
 #include <list>
+#include <memory>
 #include <string>
 
 class IAudioDriver {

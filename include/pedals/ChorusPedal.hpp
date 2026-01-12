@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IBasePedal.hpp"
+#include "cmath"
 
 class ChorusPedal: public IBasePedal {
 public:
